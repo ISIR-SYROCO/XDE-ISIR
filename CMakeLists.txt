@@ -1,0 +1,21 @@
+cmake_minimum_required(VERSION 2.8)
+INCLUDE(cmake/macros.cmake)
+
+FIND_PYTHON()
+
+IF(NOT INSTALL_MODE)
+	SET(INSTALL_MODE "install")
+ENDIF(NOT INSTALL_MODE)
+
+MESSAGE("
+*********
+Python modules will be installed in ${CMAKE_INSTALL_PREFIX}")
+MESSAGE("Python modules install mode choosen: ${INSTALL_MODE}
+*********
+")
+
+INSTALL_PYTHON_MODULE(XDE-WorldManager ${INSTALL_MODE} ${CMAKE_INSTALL_PREFIX})
+INSTALL_PYTHON_MODULE(XDE-RobotLoader ${INSTALL_MODE} ${CMAKE_INSTALL_PREFIX})
+INSTALL_PYTHON_MODULE(XDE-Spacemouse ${INSTALL_MODE} ${CMAKE_INSTALL_PREFIX})
+ADD_SUBDIRECTORY(XDE-Resources)
+
