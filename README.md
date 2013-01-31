@@ -1,7 +1,7 @@
 XDE-ISIR EXPERIMENTAL:
 ======================
 
-Packages all XDE-ISIR tools
+This repository contains all XDE-ISIR tools available
 
 	git submodule init
 	git submodule update
@@ -10,3 +10,8 @@ Packages all XDE-ISIR tools
 	cmake [-DCMAKE_INSTALL_PREFIX=path] [-DINSTALL_MODE=develop] ..
 	make install
 
+
+To update modules:
+
+	git pull
+	git submodule update
