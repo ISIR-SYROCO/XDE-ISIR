@@ -10,3 +10,6 @@
 [submodule "XDE-Spacemouse"]
 	path = XDE-Spacemouse
 	url = git@github.com:XDE-ISIR/XDE-Spacemouse.git
+[submodule "XDE-ISIRController"]
+	path = XDE-ISIRController
+	url = git@github.com:XDE-ISIR/XDE-ISIRController.git
