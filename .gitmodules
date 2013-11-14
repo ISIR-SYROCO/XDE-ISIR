@@ -1,15 +1,15 @@
 [submodule "XDE-WorldManager"]
 	path = XDE-WorldManager
-	url = git@github.com:XDE-ISIR/XDE-WorldManager.git
+	url = git://github.com:XDE-ISIR/XDE-WorldManager.git
 [submodule "XDE-RobotLoader"]
 	path = XDE-RobotLoader
-	url = git@github.com:XDE-ISIR/XDE-RobotLoader.git
+	url = git://github.com:XDE-ISIR/XDE-RobotLoader.git
 [submodule "XDE-Resources"]
 	path = XDE-Resources
-	url = git@github.com:XDE-ISIR/XDE-Resources.git
+	url = git://github.com:XDE-ISIR/XDE-Resources.git
 [submodule "XDE-Spacemouse"]
 	path = XDE-Spacemouse
-	url = git@github.com:XDE-ISIR/XDE-Spacemouse.git
+	url = git://github.com:XDE-ISIR/XDE-Spacemouse.git
 [submodule "XDE-ISIRController"]
 	path = XDE-ISIRController
-	url = git@github.com:XDE-ISIR/XDE-ISIRController.git
+	url = git://github.com:XDE-ISIR/XDE-ISIRController.git
