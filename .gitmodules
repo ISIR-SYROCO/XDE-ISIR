@@ -15,4 +15,4 @@
 	url = https://github.com/XDE-ISIR/XDE-ISIRController.git
 [submodule "XDE-SwigISIRController"]
 	path = XDE-SwigISIRController
-	url = git://github.com/XDE-ISIR/XDE-SwigISIRController
+	url = https://github.com/XDE-ISIR/XDE-SwigISIRController
