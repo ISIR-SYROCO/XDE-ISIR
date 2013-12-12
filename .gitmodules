@@ -16,3 +16,6 @@
 [submodule "XDE-SwigISIRController"]
 	path = XDE-SwigISIRController
 	url = https://github.com/XDE-ISIR/XDE-SwigISIRController
+[submodule "eigen_lgsm"]
+	path = eigen_lgsm
+	url = https://github.com/XDE-ISIR/eigen_lgsm.git
