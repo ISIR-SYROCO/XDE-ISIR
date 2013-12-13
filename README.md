@@ -1,24 +1,3 @@
-XDE-ISIR:
-=========
-
-Install:
---------
-This repository contains all XDE-ISIR tools available
-
-    git clone https://github.com/XDE-ISIR/XDE-ISIR.git
-	git submodule init
-	git submodule update
-	mkdir _build
-	cd _build
-	cmake [-DCMAKE_INSTALL_PREFIX=path] [-DINSTALL_MODE=develop] ..
-	make install
-
-To update everything:
----------------------
-
-	git pull
-	git submodule update
-
 XDE-ISIR EXPERIMENTAL:
 ======================
 
@@ -39,3 +18,26 @@ or
 
     python setup.py develop --prefix=path
 
+To update everything:
+---------------------
+
+	git pull
+	git submodule update
+
+To commit change:
+-----------------
+
+To update the global XDE-ISIR, you have to update the submodule first,
+then tell XDE-ISIR to use the new version of the submodule by adding it.
+
+Example:
+
+In a submodule directory (for example XDE-WorldManager):
+
+    git add something
+    git commit -m "Fix something"
+    git push
+    cd ..
+    git add XDE-WorldManager
+    git commit -m "Update XDE-WorldManager"
+    git push
