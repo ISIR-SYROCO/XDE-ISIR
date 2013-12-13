@@ -16,3 +16,6 @@
 [submodule "XDE-SwigISIRController"]
 	path = XDE-SwigISIRController
 	url = https://github.com/XDE-ISIR/XDE-SwigISIRController
+[submodule "IsirPythonTools"]
+	path = IsirPythonTools
+	url = https://github.com/sovannara-hak/IsirPythonTools.git
