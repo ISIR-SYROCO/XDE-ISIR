@@ -2,10 +2,39 @@ from IsirPythonTools import *
 
 # try to find interesting module
 eigen_lgsm             = pkgconfig("eigen_lgsm", True)
-quadprog               = pkgconfig("quadprog", True)
-orc_framework          = pkgconfig("orc_framework", True)
-orcisir_ISIRController = pkgconfig("orcisir_ISIRController", True)
-xdecore                = pkgconfig("xdecore", False)
+
+try:
+    quadprog               = pkgconfig("quadprog", True)
+except ValueError:
+    print "Quadprog was not found, XDE-SwigISIRController and XDE-ISIRController will not be installed"
+    print "Press Enter to continue"
+    quadprog = None
+    raw_input()
+
+try:
+    orc_framework          = pkgconfig("orc_framework", True)
+except ValueError:
+    print "orc_framework was not found, XDE-SwigISIRController and XDE-ISIRController will not be installed"
+    print "Press Enter to continue"
+    orc_framework = None
+    raw_input()
+
+try:
+    orcisir_ISIRController = pkgconfig("orcisir_ISIRController", True)
+except ValueError:
+    print "orcisir_ISIRController was not found, XDE-SwigISIRController and XDE-ISIRController will not be installed"
+    print "Press Enter to continue"
+    orcisir_ISIRController = None
+    raw_input()
+
+try:
+    xdecore                = pkgconfig("xdecore", True)
+except ValueError:
+    print "xdecore was not found, XDE-SwigISIRController and XDE-ISIRController will not be installed"
+    print "Press Enter to continue"
+    xdecore = None
+    raw_input()
+
 additional             = get_additional_include_dir_from_env()
 
 orocos                 = pkgconfig("orocos-rtt-gnulinux", False)
@@ -13,7 +42,18 @@ orocos                 = pkgconfig("orocos-rtt-gnulinux", False)
 # gather all data
 other_swig_opt = []
 other_compiler_args = []
-packages_data = get_packages_data([eigen_lgsm, quadprog, orc_framework, orcisir_ISIRController, additional])
+packages_data_list = [eigen_lgsm]
+
+if quadprog is not None:
+    packages_data_list.append(quadprog)
+if orc_framework is not None:
+    packages_data_list.append(orc_framework)
+if orcisir_ISIRController is not None:
+    packages_data_list.append(orcisir_ISIRController)
+
+packages_data_list.append(additional)
+
+packages_data = get_packages_data(packages_data_list)
 
 
 # check for optional package: xde
@@ -35,40 +75,50 @@ if orocos is not None:
     other_swig_opt.append("-DOROCOS_IS_AVAILABLE")
 
 
-
-# SwigISIRController
-_swig_swig_isir_controller = Extension("_swig_isir_controller",
-                   ["XDE-SwigISIRController/src/swig_isir_controller.i"],
-                   swig_opts = ["-c++"] + ["-I"+p for p in packages_data['include_dirs']] + other_swig_opt,
-                   extra_compile_args = ["-fpermissive"] + other_compiler_args,
-                   **packages_data #include, libs
-                   )
-
-
-
-#to force the package building extension before all we change the script_args list:
-import sys
-#sys.argv.remove("develop")
-script_args= ["build_ext", "--build-lib=XDE-SwigISIRController/src"] + sys.argv[1:] # To force a first build of the Extension(s)
-
 packages_dict={'xde_world_manager':'XDE-WorldManager/src',
               'xde_resources': 'XDE-Resources/src',
               'xde_robot_loader': 'XDE-RobotLoader/src',
-              'xde_spacemouse': 'XDE-Spacemouse/src',
-              'swig_isir_controller': 'XDE-SwigISIRController/src',
-              'xde_isir_controller': 'XDE-ISIRController/src'}
+              'xde_spacemouse': 'XDE-Spacemouse/src'}
+
+package_data_dict={'xde_resources': ['resources/urdf/*.dae', 'resources/urdf/lwr/*.dae', 'resources/urdf/*.xml']}
+
+ext_modules_list = []
+
+
+#if Joseph's controller has been found, install XDE-SwigISIRController and XDE-ISIRController
+if (orcisir_ISIRController and quadprog and orc_framework and xdecore) is not None:
+    # SwigISIRController
+    _swig_swig_isir_controller = Extension("_swig_isir_controller",
+                       ["XDE-SwigISIRController/src/swig_isir_controller.i"],
+                       swig_opts = ["-c++"] + ["-I"+p for p in packages_data['include_dirs']] + other_swig_opt,
+                       extra_compile_args = ["-fpermissive"] + other_compiler_args,
+                       **packages_data #include, libs
+                       )
+
+
+
+    #to force the package building extension before all we change the script_args list:
+    import sys
+    #sys.argv.remove("develop")
+    script_args= ["build_ext", "--build-lib=XDE-SwigISIRController/src"] + sys.argv[1:] # To force a first build of the Extension(s)
+
+    packages_dict['swig_isir_controller'] = 'XDE-SwigISIRController/src'
+    packages_dict['xde_isir_controller'] = 'XDE-ISIRController/src'
+
+    package_data_dict['swig_isir_controller'] = ['*.so']
+
+    ext_modules_list.append(_swig_swig_isir_controller)
 
 setup(name='XDE-ISIR',
 	  version='0.1',
 	  description='',
 	  author='Soseph',
 	  author_email='hak@isir.upmc.fr',
-      ext_modules = [_swig_swig_isir_controller],
+      ext_modules = ext_modules_list,
 	  package_dir = packages_dict,
 	  packages = packages_dict.keys(),
       include_package_data=True,
-	  package_data={'xde_resources': ['resources/urdf/*.dae', 'resources/urdf/lwr/*.dae', 'resources/urdf/*.xml'],
-                    'swig_isir_controller':['*.so']},
+	  package_data=package_data_dict,
 	  cmdclass=cmdclass,
 
 	  script_name=script_name,
