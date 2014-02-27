@@ -1,21 +1,21 @@
 [submodule "XDE-WorldManager"]
 	path = XDE-WorldManager
-	url = https://github.com/XDE-ISIR/XDE-WorldManager.git
+	url = https://github.com/ISIR-SYROCO/XDE-WorldManager.git
 [submodule "XDE-RobotLoader"]
 	path = XDE-RobotLoader
-	url = https://github.com/XDE-ISIR/XDE-RobotLoader.git
+	url = https://github.com/ISIR-SYROCO/XDE-RobotLoader.git
 [submodule "XDE-Resources"]
 	path = XDE-Resources
-	url = https://github.com/XDE-ISIR/XDE-Resources.git
+	url = https://github.com/ISIR-SYROCO/XDE-Resources.git
 [submodule "XDE-Spacemouse"]
 	path = XDE-Spacemouse
-	url = https://github.com/XDE-ISIR/XDE-Spacemouse.git
+	url = https://github.com/ISIR-SYROCO/XDE-Spacemouse.git
 [submodule "XDE-ISIRController"]
 	path = XDE-ISIRController
-	url = https://github.com/XDE-ISIR/XDE-ISIRController.git
+	url = https://github.com/ISIR-SYROCO/XDE-ISIRController.git
 [submodule "XDE-SwigISIRController"]
 	path = XDE-SwigISIRController
-	url = https://github.com/XDE-ISIR/XDE-SwigISIRController
+	url = https://github.com/ISIR-SYROCO/XDE-SwigISIRController
 [submodule "IsirPythonTools"]
 	path = IsirPythonTools
-	url = https://github.com/XDE-ISIR/IsirPythonTools.git
+	url = https://github.com/ISIR-SYROCO/IsirPythonTools.git
