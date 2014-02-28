@@ -80,7 +80,8 @@ packages_dict={'xde_world_manager':'XDE-WorldManager/src',
               'xde_robot_loader': 'XDE-RobotLoader/src',
               'xde_spacemouse': 'XDE-Spacemouse/src'}
 
-package_data_dict={'xde_resources': ['resources/urdf/*.dae', 'resources/urdf/lwr/*.dae', 'resources/urdf/*.xml']}
+package_data_dict={'xde_resources': ['resources/urdf/*.dae', 'resources/urdf/lwr/*.dae', 'resources/urdf/*.xml'],
+                   'xde_robot_loader': ['simple_shapes.dae']}
 
 ext_modules_list = []
 
