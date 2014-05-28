@@ -28,6 +28,14 @@ except ValueError:
     raw_input()
 
 try:
+    isirtaskmanager = pkgconfig("isirtaskmanager", False)
+except ValueError:
+    print "isir_task_manager was not found will not be supported"
+    print "Press Enter to continue"
+    isir_task_manager = None
+    raw_input()
+
+try:
     xdecore                = pkgconfig("xdecore", True)
 except ValueError:
     print "xdecore was not found, XDE-SwigISIRController and XDE-ISIRController will not be installed"
@@ -50,6 +58,8 @@ if orc_framework is not None:
     packages_data_list.append(orc_framework)
 if orcisir_ISIRController is not None:
     packages_data_list.append(orcisir_ISIRController)
+if isirtaskmanager is not None:
+    packages_data_list.append(isirtaskmanager)
 
 packages_data_list.append(additional)
 
@@ -88,6 +98,7 @@ ext_modules_list = []
 
 #if Joseph's controller has been found, install XDE-SwigISIRController and XDE-ISIRController
 if (orcisir_ISIRController and quadprog and orc_framework and xdecore) is not None:
+    ext_modules_list = []
     # SwigISIRController
     _swig_swig_isir_controller = Extension("_swig_isir_controller",
                        ["XDE-SwigISIRController/src/swig_isir_controller.i"],
@@ -95,7 +106,17 @@ if (orcisir_ISIRController and quadprog and orc_framework and xdecore) is not No
                        extra_compile_args = ["-fpermissive"] + other_compiler_args,
                        **packages_data #include, libs
                        )
+    ext_modules_list.append(_swig_swig_isir_controller)
 
+    if isirtaskmanager is not None:
+        # isirtaskmanager
+        _isir_task_manager = Extension("_isir_task_manager", 
+                           ["XDE-SwigISIRController/src/isir_task_manager.i"],
+                           swig_opts = ["-c++"] + ["-I"+p for p in packages_data['include_dirs']] + other_swig_opt,
+                           extra_compile_args = ["-fpermissive"] + other_compiler_args,
+                           **packages_data
+                           )
+        ext_modules_list.append(_isir_task_manager)
 
 
     #to force the package building extension before all we change the script_args list:
@@ -108,7 +129,6 @@ if (orcisir_ISIRController and quadprog and orc_framework and xdecore) is not No
 
     package_data_dict['swig_isir_controller'] = ['*.so']
 
-    ext_modules_list.append(_swig_swig_isir_controller)
 
 setup(name='XDE-ISIR',
 	  version='0.1',
