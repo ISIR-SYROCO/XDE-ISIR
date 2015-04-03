@@ -125,7 +125,7 @@ if (orcisir_ISIRController and quadprog and orc_framework and xdecore) is not No
     script_args= ["build_ext", "--build-lib=XDE-SwigISIRController/src"] + sys.argv[1:] # To force a first build of the Extension(s)
 
     packages_dict['swig_isir_controller'] = 'XDE-SwigISIRController/src'
-    packages_dict['xde_isir_controller'] = 'XDE-ISIRController/src'
+    packages_dict['xde_isir_controller'] = 'XDE-ISIRController/python/src'
 
     package_data_dict['swig_isir_controller'] = ['*.so']
 
